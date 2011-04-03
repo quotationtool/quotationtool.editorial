@@ -1,0 +1,48 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <include file="dependencies.zcml"/>
+
+  <class class=".history.EditorialHistory">
+    <implements
+	interface="zope.container.interfaces.IContainerNamesContainer"
+	/>
+    <allow
+	interface="zope.container.interfaces.IReadContainer"
+	/>
+    <require
+	interface="zope.container.interfaces.IWriteContainer"
+	permission="zope.ManageContent"
+	/>
+    <allow
+	attributes="getCurrentEditorialStatus locked"
+	/>
+  </class>
+
+  <adapter
+      factory=".history.editorialHistoryAnnotation"
+      />
+
+  <adapter
+      provides="zope.container.interfaces.INameChooser"
+      for=".interfaces.IEditorialHistory"
+      factory=".history.EditorialStatusNameChooser"
+      />
+
+  <class class=".status.EditorialStatus">
+    <allow
+	interface=".interfaces.IEditorialStatus"
+	/>
+    <require
+	set_schema=".interfaces.IEditorialStatus"
+	permission="zope.ManageContent"
+	/>
+  </class>
+
+  <utility
+      name="quotationtool.editorial.Status"
+      component=".vocabulary.StatusVocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      />
+
+</configure>

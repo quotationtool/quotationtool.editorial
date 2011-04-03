@@ -1,0 +1,11 @@
+This package defines component that let you manage the editorial status
+of content object.
+
+The editorial status is a 3 value choice (needs_revision, revised,
+reopened) where revised means that the content item is 'locked'.
+
+The editorial status also requires a comment about what you invested
+revising the item.
+
+Older editorial revisions are stored in a editorial history.
+
