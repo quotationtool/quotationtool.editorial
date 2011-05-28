@@ -16,13 +16,13 @@ status = {
     'revised' : (_('status-revised-title',
                    u"Revised"),
                  _('status-revised-desc', 
-                   u"The item was editorialy revised and corrected. It is now locked for further editing."),
+                   u"The item was editorialy revised and corrected. It is now locked for editing."),
                  True,
                  ),
     'reopened' : (_('status-reopened-title',
                     u"Reopened"),
                   _('status-reopened-desc',
-                    u"The item was revised already but now it looks like it has to be revised again."),
+                    u"The item was revised and locked already but errors were still found. It is thus reopened for editing."),
                   False,
                   ),
     }
@@ -41,7 +41,8 @@ class StatusTerm(SimpleTerm):
 
 def StatusVocabulary(context):
     terms = []
-    for key, value in status.items():
+    for key in ('needs_revision', 'revised', 'reopened'):
+        value = status[key]
         terms.append(StatusTerm(key,
                                 title = value[0],
                                 description = value[1],

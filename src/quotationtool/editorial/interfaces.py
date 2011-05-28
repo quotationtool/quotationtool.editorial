@@ -81,11 +81,16 @@ class IEditorialStatus(zope.interface.Interface):
         required = True,
         )
 
-    revisor = zope.schema.TextLine(
+    revisor = zope.schema.Tuple(
         title = u"Revisor",
-        description = u"The user ID of the last revisor. This is set automatically.",
+        description = u"The principal IDs of the users participating in the revision-interaction. This is set automatically.",
+        value_type = zope.schema.TextLine(
+            title = u"principal id",
+            required = True,
+            ),
         readonly = True,
-        required = True,
+        required = False,
+        default = (),
         )
         
 

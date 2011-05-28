@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="quotationtool">
+
+  <permission
+      id="quotationtool.editorial.ReadRevisionHistory"
+      title="Read the revision history and current editorial status of an item."
+      />
+
+  <permission
+      id="quotationtool.editorial.ChangeEditorialStatus"
+      title="Change the editorial status of an item, i.e. write to its revision history."
+      />
+      
+</configure>

@@ -1,0 +1,17 @@
+<metal:macro use-macro="macro:form">
+
+  <metal:slot fill-slot="main">
+    <metal:macro use-macro="macro:widget-rows"/>
+  </metal:slot>
+
+  <metal:slot fill-slot="bottom">
+    <a class="revision-history-anchor" name="history"
+       ><img 
+	    src="transparent1x1.gif" alt="Revision History"
+	    tal:attributes="src string:/@@/quotationtool.images/transparent1x1.gif"
+	    i18n:attributes="alt revision-history-alt"
+	    /></a>
+    <metal:macro use-macro="macro:revision-history"/>
+  </metal:slot>
+
+</metal:macro>

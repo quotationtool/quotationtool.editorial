@@ -53,10 +53,19 @@ Now let's do a revision of our foo object:
 >>> stat1 = EditorialStatus()
 >>> stat1.status = 'revised'
 >>> stat1.comment = u"1 Dollar, this it is OK"
->>> stat1.revisor = u"Lucky Luke"
 
-The revision is stored on the history which is choose the name with a
-namechooser:
+Revisor and date of revision are set automatically. Revisor is set
+from participants in the interaction (see zope.security). So if there
+is no one in the interaction revisor will be an empty tuple.
+
+>>> stat1.revisor
+()
+>>> import datetime
+>>> isinstance(stat1.date, datetime.datetime)
+True
+
+The revision is stored on the history which is a container that
+chooses the name with a namechooser:
 
 >>> from zope.container.interfaces import INameChooser
 >>> name = INameChooser(IEditorialHistory(foo)).chooseName(None, stat1)
@@ -72,17 +81,17 @@ True
 True
 
 
-OK, now we have come to think that there is still a failure in foo:
+OK, now, after some time we have come to think that there is still a
+failure in foo:
 
 
 >>> from quotationtool.editorial.status import EditorialStatus
 >>> stat2 = EditorialStatus()
 >>> stat2.status = 'reopened'
 >>> stat2.comment = u"2 Dollar, this it is not OK"
->>> stat2.revisor = u"Marshall X"
 
-The revision is stored on the history which is choose the name with a
-namechooser:
+The revision is again stored on the history which chooses the name
+with a namechooser:
 
 >>> from zope.container.interfaces import INameChooser
 >>> name = INameChooser(IEditorialHistory(foo)).chooseName(None, stat2)

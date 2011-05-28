@@ -74,6 +74,7 @@ setup(
         'quotationtool.security',
         'quotationtool.site',
         'quotationtool.skin',
+        'quotationtool.tinymce',
 
         ],
     extras_require = dict(

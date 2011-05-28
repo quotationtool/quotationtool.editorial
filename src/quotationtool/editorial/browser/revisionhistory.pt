@@ -1,0 +1,60 @@
+<metal:macro define-macro="revision-history">
+<div i18n:domain="quotationtool">
+  
+  <h1 i18n:translate="">Revision History (reversed order)</h1>
+
+  <div 
+      class="revision-history" 
+      tal:repeat="revision python:reversed(list(view.history.values()))"
+      tal:define="dateTimeFormatter python:request.locale.dates.getFormatter('dateTime')">
+    <div class="revision odd"
+	tal:condition="repeat/revision/odd">
+      <metal:macro define-macro="revision">
+	<div class="revision-meta"
+	    i18n:translate="revisionhistory-revisionmeta">
+	  Revision by
+	  <span 
+	      class="revisor"
+	      i18n:name="revisor"
+	      tal:content="python:view.getRevisorTitle(revision.revisor)"
+	      >Unkown</span>
+	  on
+	  <span
+	      class="date"
+	      i18n:name="date"
+	      tal:content="python:dateTimeFormatter.format(revision.date)"
+	      >1968/01/01</span>.
+	</div>
+	<div class="editorial-status"
+	     tal:define="status python:view.getStatusTerm(revision.status)"
+	     i18n:translate="revisionhistory-editorialstatus">
+	  Editorial Status:
+	  <span 
+	      class="editorial-status-title"
+	      i18n:name="title"
+	      tal:content="status/title|default">
+	    Unkown
+	  </span>
+	  &mdash;
+	  <span
+	      class="editorial-status-description"
+	      i18n:name="description"
+	      tal:content="status/description|default">
+	    Unkown
+	  </span>    
+	</div>
+	<div class="editorial-comment" 
+	    tal:content="structure revision/comment">
+	  Text of Editorial Comment
+	</div>
+	<hr tal:condition="not: repeat/revision/end"/>
+      </metal:macro>
+    </div>
+    <div class="revision even"
+	tal:condition="repeat/revision/even">
+      <metal:macro use-macro="macro:revision"/>
+    </div>
+  </div>
+
+</div>
+</metal:macro>

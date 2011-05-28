@@ -1,0 +1,49 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    >
+
+  <include file="dependencies.zcml"/>
+
+  <include file="tabs.zcml"/>
+
+  <z3c:pagelet
+      for="..interfaces.IHasEditorialStatus"
+      name="revisionHistory.html"
+      class=".history.RevisionHistory"
+      permission="quotationtool.editorial.ReadRevisionHistory"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+  <z3c:template
+      for=".history.RevisionHistory"
+      template="revisionhistory.pt"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+  <z3c:macro
+      name="revision-history"
+      macro="revision-history"
+      template="revisionhistory.pt"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+  <z3c:macro
+      name="revision"
+      macro="revision"
+      template="revisionhistory.pt"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+
+  <z3c:pagelet
+      for="..interfaces.IHasEditorialStatus"
+      name="changeEditorialStatus.html"
+      class=".status.ChangeEditorialStatus"
+      permission="zope.ManageContent"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+  <z3c:template
+      for=".status.ChangeEditorialStatus"
+      template="changestatus.pt"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      />
+
+</configure>

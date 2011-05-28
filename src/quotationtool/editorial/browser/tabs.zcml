@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="quotationtool"
+    >
+
+  <z3c:contextMenuItem
+      for="..interfaces.IHasEditorialStatus"
+      title="[editorial-revisionhistory] Revision History"
+      name="editorial-revisionhistory"
+      permission="quotationtool.editorial.ReadRevisionHistory"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      manager="quotationtool.skin.interfaces.IItemTabs"
+      viewName="@@revisionHistory.html"
+      weight="230"
+      />
+
+  <z3c:contextMenuItem
+      for="..interfaces.IHasEditorialStatus"
+      title="[editorial-changeeditorialstatus] Editorial Status"
+      name="editorial-changeeditorialstatus"
+      permission="quotationtool.editorial.ChangeEditorialStatus"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      manager="quotationtool.skin.interfaces.IItemTabs"
+      viewName="@@changeEditorialStatus.html"
+      weight="235"
+      />
+
+</configure>
