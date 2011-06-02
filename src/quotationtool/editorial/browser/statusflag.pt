@@ -1,0 +1,4 @@
+<abbr title="Editorial Status" class="editorialstatus"
+      tal:attributes="title view/status"
+      tal:condition="not:view/locked"
+      i18n:translate="editorial-statusflag">ed</abbr>

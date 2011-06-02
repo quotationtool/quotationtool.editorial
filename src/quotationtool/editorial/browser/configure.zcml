@@ -7,6 +7,7 @@
   <include file="dependencies.zcml"/>
 
   <include file="tabs.zcml"/>
+  <include file="flags.zcml"/>
 
   <z3c:pagelet
       for="..interfaces.IHasEditorialStatus"
@@ -45,5 +46,17 @@
       template="changestatus.pt"
       layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
       />
+
+  <resourceLibrary
+      name="quotationtool.editorial"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      require="quotationtool.tinymce"
+      >
+    <directory
+        source="js"
+        include="editorial_tinymce.js"
+        />
+  </resourceLibrary>
+
 
 </configure>

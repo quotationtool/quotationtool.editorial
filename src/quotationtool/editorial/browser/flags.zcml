@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser">
+
+  <viewlet
+      name="quotationtool.editorial.browser.flags.EditorialStatusFlag"
+      for="..interfaces.IHasEditorialStatus"
+      manager="quotationtool.skin.interfaces.IFlags"
+      class=".flags.EditorialStatusFlag"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      permission="quotationtool.editorial.ChangeEditorialStatus"
+      weight="15"
+      />
+
+</configure>

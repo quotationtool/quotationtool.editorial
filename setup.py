@@ -23,6 +23,8 @@ setup(
         + '\n' +
         read('src', 'quotationtool', 'editorial', 'README.txt')
         + '\n' +
+        read('src', 'quotationtool', 'editorial', 'browser', 'README.txt')
+        + '\n' +
         'Download\n'
         '********\n'
         ),
@@ -61,18 +63,21 @@ setup(
         'zope.app.schema',
         'zope.container',
 
+        'zope.app.pagetemplate',
         'zope.viewlet',
         'z3c.pagelet',
         'z3c.form',
         'z3c.formui',
         'z3c.template',
         'z3c.macro',
+        'z3c.layer.pagelet',
         'zope.browserpage',
         'zope.app.publisher',
         'z3c.menu.ready2go',
+        'zc.resourcelibrary',
+        'zope.contentprovider',
 
         'quotationtool.security',
-        'quotationtool.site',
         'quotationtool.skin',
         'quotationtool.tinymce',
 
@@ -81,6 +86,7 @@ setup(
         test = [
             'zope.testing',
             'zope.configuration',
+            'zope.site',
             ],
         ),
     )

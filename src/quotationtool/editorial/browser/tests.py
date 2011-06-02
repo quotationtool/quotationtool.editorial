@@ -1,13 +1,13 @@
 import unittest
 import doctest
 from zope.component.testing import setUp, tearDown
-from zope.site.folder import rootFolder
+from zope.site.testing import siteSetUp
 
 _flags = doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS
 
 
 def setUpRoot(test):
-    root = rootFolder()
+    root = siteSetUp(True)
     test.globs['root'] = root
 
 

@@ -5,6 +5,7 @@ from z3c.formui import form
 from zope.container.interfaces import INameChooser
 from zope.traversing.browser.absoluteurl import absoluteURL
 from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
+import zc.resourcelibrary
 
 from quotationtool.skin.interfaces import ITabbedContentLayout
 
@@ -23,6 +24,16 @@ class ChangeEditorialStatus(form.AddForm, RevisionHistory):
     fields = field.Fields(interfaces.IEditorialStatus).select('status', 'comment')
 
     template = ViewPageTemplateFile('changestatus.pt')
+
+    def __init__(self, context, request):
+        super(ChangeEditorialStatus, self).__init__(context, request)
+        zc.resourcelibrary.need('quotationtool.editorial')
+
+    def updateWidgets(self):
+        super(ChangeEditorialStatus, self).updateWidgets()
+        current_status = interfaces.IEditorialHistory(self.getContent()).getCurrentEditorialStatus()
+        if current_status:
+            self.widgets['status'].value = (current_status.status,)
 
     def create(self, data):
         status = EditorialStatus()
