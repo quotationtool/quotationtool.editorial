@@ -2,6 +2,7 @@ from zope.interface import Interface, implements, classImplements
 import zope.schema
 from zope.schema.fieldproperty import FieldProperty
 from zope.annotation.interfaces import IAttributeAnnotatable
+from zope.location.interfaces import ILocation
 
 from quotationtool.editorial import interfaces
 
@@ -20,7 +21,9 @@ class ISampleContent(Interface):
         )
 
 class SampleContent(object):
-    implements(ISampleContent)
+    implements(ISampleContent, ILocation)
+
+    __name__ = __parent__ = None
 
     title = FieldProperty(ISampleContent['title'])
     body = FieldProperty(ISampleContent['body'])

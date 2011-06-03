@@ -6,26 +6,41 @@
     i18n_domain="quotationtool"
     >
 
+  <browser:page
+      name="editorialRedirection"
+      for="..interfaces.IHasEditorialStatus"
+      class=".tabs.EditorialStatusTabRedirector"
+      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
+      permission="quotationtool.editorial.ReadRevisionHistory"
+      />
+
   <z3c:contextMenuItem
       for="..interfaces.IHasEditorialStatus"
-      title="[editorial-revisionhistory] Revision History"
-      name="editorial-revisionhistory"
+      title="[editorial-editorialstatus] Editorial Status"
+      name="editorial-editorialstatus"
+      class=".tabs.EditorialStatusTab"
       permission="quotationtool.editorial.ReadRevisionHistory"
       layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
       manager="quotationtool.skin.interfaces.IItemTabs"
-      viewName="@@revisionHistory.html"
+      viewName="@@editorialRedirection"
       weight="230"
       />
-
-  <z3c:contextMenuItem
-      for="..interfaces.IHasEditorialStatus"
-      title="[editorial-changeeditorialstatus] Editorial Status"
-      name="editorial-changeeditorialstatus"
-      permission="quotationtool.editorial.ChangeEditorialStatus"
-      layer="quotationtool.skin.interfaces.IQuotationtoolBrowserLayer"
-      manager="quotationtool.skin.interfaces.IItemTabs"
-      viewName="@@changeEditorialStatus.html"
-      weight="235"
+  <adapter
+      for="..interfaces.IHasEditorialStatus
+	   zope.publisher.interfaces.browser.IBrowserRequest
+	   .status.ChangeEditorialStatus
+	   z3c.menu.ready2go.interfaces.IMenuManager
+	   .tabs.IEditorialStatusTab"
+      provides="z3c.menu.ready2go.interfaces.ISelectedChecker"
+      factory="z3c.menu.ready2go.checker.TrueSelectedChecker"
       />
-
+  <adapter
+      for="..interfaces.IHasEditorialStatus
+	   zope.publisher.interfaces.browser.IBrowserRequest
+	   .history.RevisionHistory
+	   z3c.menu.ready2go.interfaces.IMenuManager
+	   .tabs.IEditorialStatusTab"
+      provides="z3c.menu.ready2go.interfaces.ISelectedChecker"
+      factory="z3c.menu.ready2go.checker.TrueSelectedChecker"
+      />
 </configure>

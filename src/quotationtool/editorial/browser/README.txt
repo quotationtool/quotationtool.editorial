@@ -147,3 +147,15 @@ But if the item needs a revision or was reopened, it says:
 >>> flag.update()
 >>> flag.render()
 u'<abbr title="Editorial Status: Reopened"\n class="editorialstatus">ed</abbr>'
+
+
+Navigation
+----------
+
+There is only one navigation item but a redirector that redirects to
+ether the form or the revision history, depending on permissions
+granted to the participants in the interaction.
+
+>>> #from quotationtool.editorial.browser.nav import NavItemRedirector
+>>> #redirector = NavItemRedirector(foo, TestRequest())
+>>> #redirector()

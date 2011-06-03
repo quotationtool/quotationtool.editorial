@@ -1,17 +1,54 @@
-<metal:macro use-macro="macro:form">
+<metal:macro use-macro="macro:form" i18n:domain="quotationtool">
+
+  <metal:slot fill-slot="extra-info">
+    <div class="current-editorial-status">
+      <h3 i18n:translate="changeEditorialStatus-currentstatus">Current Editorial Status</h3>
+      <tal:block
+	  tal:condition="view/history">
+	<tal:block
+	    tal:define="dateTimeFormatter python:request.locale.dates.getFormatter('dateTime'); 
+			ruler python:False;
+			revision python:list(view.history.values())[-1]">
+	  <metal:macro use-macro="macro:revision"/>
+	</tal:block>
+      </tal:block>
+      <tal:block
+	  tal:condition="not:view/history">
+	<div i18n:translate="changeEditorialStatus-notyetrevised">
+	  This item has not yet been editorially revised.
+	</div>
+      </tal:block>
+    </div>
+    <div class="form-info"
+	 tal:condition="view/info|nothing">
+      <span class="form-info-label" 
+	    i18n:translate="form-info">Note: </span>
+      <span i18n:translate=""
+	 tal:content="structure view/info|nothing">info</span>
+    </div>
+  </metal:slot>
 
   <metal:slot fill-slot="main">
     <metal:macro use-macro="macro:widget-rows"/>
   </metal:slot>
 
   <metal:slot fill-slot="bottom">
+
     <a class="revision-history-anchor" name="history"
        ><img 
 	    src="transparent1x1.gif" alt="Revision History"
 	    tal:attributes="src string:/@@/quotationtool.images/transparent1x1.gif"
 	    i18n:attributes="alt revision-history-alt"
 	    /></a>
+
     <metal:macro use-macro="macro:revision-history"/>
+
+    <div class="revisionhistory-link">
+      <a href="@@revisionHistory.html"
+	 tal:attributes="href string:${context/@@absolute_url}/@@revisionHistory.html"
+	 i18n:translate="revisionhistory-link">Revision History</a>
+    </div>
+
   </metal:slot>
 
 </metal:macro>

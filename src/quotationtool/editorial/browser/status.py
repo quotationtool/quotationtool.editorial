@@ -21,6 +21,9 @@ class ChangeEditorialStatus(form.AddForm, RevisionHistory):
 
     label = _('changeEditorialStatus-label', u"Change Editorial Status")
 
+    info = _('changeEditorialStatus-info', 
+             u"Set the editorial state and write a short description of the editorial work you invested on this item. <br />For a history of editorial revisions see below.")
+
     fields = field.Fields(interfaces.IEditorialStatus).select('status', 'comment')
 
     template = ViewPageTemplateFile('changestatus.pt')

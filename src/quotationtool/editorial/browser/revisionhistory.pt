@@ -3,10 +3,16 @@
   
   <h1 i18n:translate="">Revision History (reversed order)</h1>
 
+  <div
+      tal:condition="not:view/history"
+      i18n:translate="changeEditorialStatus-notyetrevised">
+    This item has not yet been editorially revised.
+  </div>
   <div 
       class="revision-history" 
       tal:repeat="revision python:reversed(list(view.history.values()))"
       tal:define="dateTimeFormatter python:request.locale.dates.getFormatter('dateTime')">
+    <tal:block define="ruler not: repeat/revision/end">
     <div class="revision odd"
 	tal:condition="repeat/revision/odd">
       <metal:macro define-macro="revision">
@@ -47,13 +53,14 @@
 	    tal:content="structure revision/comment">
 	  Text of Editorial Comment
 	</div>
-	<hr tal:condition="not: repeat/revision/end"/>
+	<hr tal:condition="ruler"/>
       </metal:macro>
     </div>
     <div class="revision even"
 	tal:condition="repeat/revision/even">
       <metal:macro use-macro="macro:revision"/>
     </div>
+    </tal:block>
   </div>
 
 </div>
